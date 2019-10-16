@@ -1,0 +1,72 @@
+public class Ship extends Thread{
+    private int numberOfContainersOnShip;
+    private String nameOfShip;
+    private int shipCapacity;
+    private Port port;
+
+    public Port getPort() {
+        return port;
+    }
+
+    public void setPort(Port port) {
+        this.port = port;
+    }
+
+    public Ship(String nameOfShip, int shipCapacity, int numberOfContainersOnShip,Port port) {
+        this.nameOfShip = nameOfShip;
+        this.shipCapacity=shipCapacity;
+        this.numberOfContainersOnShip=numberOfContainersOnShip;
+        this.port=port;
+    }
+
+    public int getShipCapacity() {
+        return shipCapacity;
+    }
+
+    public void setShipCapacity(int shipCapacity) {
+        this.shipCapacity = shipCapacity;
+    }
+
+    public String getNameOfShip() {
+        return nameOfShip;
+    }
+
+    public void setNameOfShip(String nameOfShip) {
+        this.nameOfShip = nameOfShip;
+    }
+
+    public int getNumberOfContainersOnShip() {
+        return numberOfContainersOnShip;
+    }
+
+    public void setNumberOfContainersOnShip(int numberOfContainersOnShip) {
+        this.numberOfContainersOnShip = numberOfContainersOnShip;
+    }
+
+    @Override
+    public void run() {
+        if (this.numberOfContainersOnShip>0&&port.getCurrentNumberOfContainersInPort()<(port.getCapacityOfPort()-this.numberOfContainersOnShip)){
+         this.offloadTheContainers();
+        }else{
+            System.out.println("Ship "+this.getNameOfShip()+".Error with offloading.");
+        }
+        if (this.numberOfContainersOnShip<this.getShipCapacity()&&port.getCurrentNumberOfContainersInPort()>0){
+            this.loadTheContainers();
+        }else {
+            System.out.println("Ship "+this.getNameOfShip()+".Error with loading.");
+        }
+    }
+
+    public void loadTheContainers(){
+        int numberToLoadToTheShip=this.getShipCapacity();
+        System.out.println("Ship "+this.getNameOfShip()+" is loading "+numberToLoadToTheShip+" containers.");
+        port.setCurrentNumberOfContainersInPort(port.getCurrentNumberOfContainersInPort()-numberToLoadToTheShip);
+        System.out.println("Port now contains "+port.getCurrentNumberOfContainersInPort()+" containers");
+    }
+    public void offloadTheContainers(){
+        int numberToOffload=this.numberOfContainersOnShip;
+        System.out.println("Ship "+this.getNameOfShip()+" is offloading "+numberToOffload+" containers.");
+        port.setCurrentNumberOfContainersInPort(port.getCurrentNumberOfContainersInPort()+numberToOffload);
+        System.out.println("Port now contains "+port.getCurrentNumberOfContainersInPort()+" containers");
+    }
+}
