@@ -1,0 +1,47 @@
+import java.io.Serializable;
+
+public class Book implements Serializable {
+    private String nameOfBook;
+    private String authorOfBook;
+    private String typeOfBook;
+    private static final long serialVersionUID=1L;
+
+    public String getTypeOfBook() {
+        return typeOfBook;
+    }
+
+    public void setTypeOfBook(String typeOfBook) {
+        this.typeOfBook = typeOfBook;
+    }
+
+    public Book(String nameOfBook, String authorOfBook,String typeOfBook) {
+        this.nameOfBook = nameOfBook;
+        this.authorOfBook=authorOfBook;
+        this.typeOfBook=typeOfBook;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "nameOfBook='" + nameOfBook + '\'' +
+                ", authorOfBook='" + authorOfBook + '\'' +
+                ", typeOfBook='" + typeOfBook + '\'' +
+                '}';
+    }
+
+    public String getAuthorOfBook() {
+        return authorOfBook;
+    }
+
+    public void setAuthorOfBook(String authorOfBook) {
+        this.authorOfBook = authorOfBook;
+    }
+
+    public String getNameOfBook() {
+        return nameOfBook;
+    }
+
+    public void setNameOfBook(String nameOfBook) {
+        this.nameOfBook = nameOfBook;
+    }
+}
