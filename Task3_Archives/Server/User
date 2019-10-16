@@ -1,0 +1,79 @@
+import java.io.*;
+
+public class User {
+    private String name;
+    private String role;
+    private Document document;
+    private FileOutputStream fileOutputStream;
+    private BufferedReader bufferedReader;
+    private ObjectOutputStream objectOutputStream;
+    private FileInputStream fileInputStream;
+    private ObjectInputStream objectInputStream;
+
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public User(String name, String role) {
+        this.name = name;
+        this.role=role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void createNewDocument(String name,String text) throws IOException {
+         fileOutputStream=new FileOutputStream(new File(name));
+         objectOutputStream=new ObjectOutputStream(fileOutputStream);
+         Document document=new Document(name,text);
+         objectOutputStream.writeObject(document);
+         objectOutputStream.flush();
+          fileOutputStream.close();
+          objectOutputStream.close();
+    }
+    public String  reviewDocument(String  document){
+        for (int i=0;i<Document.listOfDocuments.size();i++) {
+            if(document.equals(Document.listOfDocuments.get(i).getNameOfDocument())) {
+             return Document.listOfDocuments.get(i).toString();
+            }
+            }
+       return null;
+    }
+    public String  changeDocument(String document) throws IOException, ClassNotFoundException {
+        String textOfdocument;
+        for (int i=0;i<Document.listOfDocuments.size();i++) {
+            if(document.equals(Document.listOfDocuments.get(i).getNameOfDocument())){
+                textOfdocument=Document.listOfDocuments.get(i).getTextOfDocument();
+                return textOfdocument;
+            }
+        }
+        return null;
+    }
+    public void changeDocument2(String name,String text) throws IOException, ClassNotFoundException {
+        for (int i=0;i<Document.listOfDocuments.size();i++) {
+            if(name.equals(Document.listOfDocuments.get(i).getNameOfDocument())){
+                Document.listOfDocuments.get(i).setNameOfDocument(name);
+                Document.listOfDocuments.get(i).setTextOfDocument(text);
+                break;
+            }
+        }
+    }
+}
