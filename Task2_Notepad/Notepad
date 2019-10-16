@@ -1,0 +1,79 @@
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Locale;
+
+public class Notepad implements Serializable, Comparable<Notepad> {
+    private String topic;
+    private String date;
+    private String email;
+    private String message;
+    private static final long serialVersionUID=1L;
+
+    public Notepad(String topic,String email,String message) {
+        this.topic = topic;
+        this.email=email;
+        this.message=message;
+        getCurrentDate();
+    }
+    public void getCurrentDate(){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy_dd_MMM", Locale.ENGLISH);
+        Calendar cal = Calendar.getInstance();
+        date =simpleDateFormat.format(cal.getTime());
+    }
+    @Override
+    public String toString() {
+        return "Notepad:" +
+                "topic- " + topic  +
+                ", date- " + date +
+                ", email- " + email  +
+                ",message- " + message ;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+
+    public static Comparator<Notepad> NoteTopicComparator = new Comparator<Notepad>() {
+        public int compare(Notepad notepad1, Notepad notepad2) {
+            String noteTopic1 = notepad1.getTopic();
+            String noteTopic2 = notepad2.getTopic();
+            return noteTopic1.compareTo(noteTopic2);
+        }
+    };
+
+    @Override
+    public int compareTo(Notepad compareNote) {
+        return 0;
+    }
+}
