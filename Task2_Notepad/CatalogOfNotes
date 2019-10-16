@@ -1,0 +1,115 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class CatalogOfNotes {
+    public static ArrayList<Notepad> catalogOfNotes=new ArrayList<>();
+
+    public CatalogOfNotes(){
+    }
+    static {
+     catalogOfNotes.add(new Notepad("hello","1@gmail.com","Hello everyone"));
+        catalogOfNotes.add(new Notepad("1","55@gmail.com","123"));
+        catalogOfNotes.add(new Notepad("tt","4@gmail.com","Hello "));
+        catalogOfNotes.add(new Notepad("6","7@gmail.com","1"));
+        catalogOfNotes.add(new Notepad("hi","8@gmail.com","22"));
+        catalogOfNotes.add(new Notepad("abc","66@gmail.com","8"));
+    }
+
+    public static void convertArrayToText() throws IOException {
+        FileOutputStream fileOutputStream=new FileOutputStream("CatalogOfNotes.txt");
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(catalogOfNotes);
+        fileOutputStream.close();
+        objectOutputStream.close();
+    }
+    public static ArrayList<Notepad> convertTextToArray() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream=new FileInputStream("CatalogOfNotes.txt");
+        ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+        Object object=objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        ArrayList<Notepad> catalogOfNotes=(ArrayList<Notepad>)object;
+        return catalogOfNotes;
+    }
+
+    public void addNote(Notepad notepad) throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        catalogOfNotes.add(notepad);
+        System.out.println("Note has been successfully added");
+        convertArrayToText();
+    }
+
+    public void sortAllNotes() throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        catalogOfNotes.sort(Notepad.NoteTopicComparator);
+        System.out.println("Notes were sorted by topic:");
+        for (int i=0;i<catalogOfNotes.size();i++){
+            System.out.println(catalogOfNotes.get(i));
+        }
+    }
+
+    public void findByTopicInText(String topic) throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        Pattern pattern=Pattern.compile(topic,Pattern.CASE_INSENSITIVE);
+        int x=0;
+        for (Notepad note:catalogOfNotes){
+            Matcher matcher=pattern.matcher(note.getTopic());
+            if (matcher.find()){
+                System.out.println("Found note by topic: "+note.toString());
+                x++;
+            }
+        }
+        if (x==0){
+            System.out.println("Nothing was found by this topic");
+        }
+    }
+
+    public void findByEmailInText(String email) throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        int x=0;
+        Pattern pattern=Pattern.compile(email,Pattern.CASE_INSENSITIVE);
+        for (Notepad note:catalogOfNotes){
+            Matcher matcher=pattern.matcher(note.getEmail());
+            if (matcher.find()){
+                System.out.println("Found note by email: "+note.toString());
+                x++;
+            }
+        }
+        if (x==0){
+            System.out.println("Nothing was found by this email");
+        }
+    }
+
+    public void findByDateInText(String date) throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        Pattern pattern=Pattern.compile(date,Pattern.CASE_INSENSITIVE);
+        int x=0;
+        for (Notepad note:catalogOfNotes){
+            Matcher matcher=pattern.matcher(note.getDate());
+            if (matcher.find()){
+                System.out.println("Found note by date: "+note.toString());
+                x++;
+            }}
+        if (x==0){
+            System.out.println("Nothing has been found by this date");
+        }
+    }
+
+    public void findByWordInText(String word) throws IOException, ClassNotFoundException {
+        catalogOfNotes=convertTextToArray();
+        int x=0;
+        Pattern pattern=Pattern.compile(word,Pattern.CASE_INSENSITIVE);
+        for (Notepad note:catalogOfNotes){
+            Matcher matcher=pattern.matcher(note.toString());
+            if (matcher.find()){
+                System.out.println("Found note by word: "+note.toString());
+                x++;
+            }
+        }
+        if(x==0){
+            System.out.println("Nothing was found by this word");
+        }
+    }
+}
