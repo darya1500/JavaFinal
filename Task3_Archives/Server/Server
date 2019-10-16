@@ -1,0 +1,97 @@
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+//Попробуйте решить данную задачу хотя бы на 50%.
+//Задание 3: создайте клиент-серверное приложение “Архив”.
+//Общие требования к заданию:
+//• В архиве хранятся Дела (например, студентов). Архив находится на сервере.
+//• Клиент, в зависимости от прав, может запросить дело на просмотр, внести в
+//него изменения, или создать новое дело.
+//Требования к коду лабораторной работы:
+//• Для реализации сетевого соединения используйте сокеты.
+//• Формат хранения данных на сервере – xml-файлы.
+
+public class Server {
+    private static Socket clientSocket;
+    private static ServerSocket server;
+    private static BufferedReader reader;
+    private static DataOutputStream oos;
+    private static DataInputStream ois;
+
+    public static void main(String[] args) throws IOException {
+        User user = new User("sam", "admin");
+            try {
+                server = new ServerSocket(4004);
+                System.out.println("Server working!");
+                clientSocket = server.accept();
+                System.out.print("Connection accepted.");
+                oos = new DataOutputStream(clientSocket.getOutputStream());
+                System.out.println("DataOutputStream  created");
+                ois = new DataInputStream(clientSocket.getInputStream());
+                System.out.println("DataInputStream created");
+                while (!clientSocket.isClosed()) {
+                    System.out.println("Server reading from channel");
+                    String entry = ois.readUTF();
+                    System.out.println("Server try writing to channel");
+                    if (entry.equals("1")){
+                        if (user.getRole().equals("admin")){
+                            oos.writeUTF("Write name of the file");
+                            oos.flush();
+                            String name=ois.readUTF();
+                            oos.writeUTF("Write text of the file");
+                            String text=ois.readUTF();
+                            user.createNewDocument(name,text);
+                            oos.writeUTF("Server reply - document is created");
+                            break;
+                        }else {
+                            oos.writeUTF("You can not create document");
+                            break;
+                        }
+                    }
+                    if (entry.equals("2")){
+                        if (user.getRole().equals("admin")){
+                        oos.writeUTF("Write name of the file");
+                            oos.flush();
+                        String iName = ois.readUTF();
+                            String textOfDoc=user.changeDocument(iName);
+                        oos.writeUTF("Here is the text of document. Write changed text below.");
+                        oos.flush();
+                        oos.writeUTF(textOfDoc);
+                        oos.flush();
+                        String textOfDoc2=ois.readUTF();
+                        user.changeDocument2(iName,textOfDoc2);
+                            oos.writeUTF("Server reply - document is changed");
+                            break;
+                    }else {
+                            oos.writeUTF("You can not change the document");
+                            break;
+                        }
+                    }
+                    if (entry.equals("3")){
+                        oos.writeUTF("Write name of the document");
+                        String entry3 = ois.readUTF();
+                       String inputString=user.reviewDocument(entry3);
+                        oos.writeUTF(inputString);
+                        oos.flush();
+                        break;
+                }
+                    if (entry.equalsIgnoreCase("quit")) {
+                        System.out.println("Client disconnected");
+                        oos.writeUTF("Server reply - " + entry + " - OK");
+                        oos.flush();
+                        Thread.sleep(3000);
+                        break;
+                    }
+                    oos.writeUTF("Server reply - " + entry + " - OK");
+                    System.out.println("Server Wrote message to client.");
+                    oos.flush();
+                }
+                ois.close();
+                oos.close();
+                clientSocket.close();
+                System.out.println("Closing connections & channels - DONE.");
+            }  catch( Exception ex) {
+        ex.printStackTrace();
+    }
+        }}
