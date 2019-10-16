@@ -1,0 +1,68 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Menu {
+    public Menu() {
+    }
+
+    public void openMenu() throws IOException, ClassNotFoundException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Write:" + "\n" +
+                "1-sign in" + "\n" +
+                "2-create new user" + "\n" +
+                "exit-exit");
+        String input = bufferedReader.readLine();
+        User user = new User();
+        if (input.equals("exit")) {
+            System.out.println("exit");
+        }
+        int x = Integer.parseInt(input);
+        switch (x) {
+            case 1:
+                user = User.signInUser();
+                break;
+            case 2:
+                user = User.createNewUser();
+                break;
+            default:
+                System.out.println("Error");
+                break;
+        }
+        String input2 =null;
+            System.out.println("Write:" + "\n" +
+                    "1-look through catalog of books" + "\n" +
+                    "2-search for a book" + "\n" +
+                    "3-add new book" + "\n" +
+                    "4-delete new book" + "\n" +
+                    "5-write email to administrator" + "\n" +
+                    "exit-to exit notepad");
+            do {
+                input2 = bufferedReader.readLine();
+                if (input2.equals("exit")) {
+                    System.out.println("exit");
+                    break;
+                }
+                int y = Integer.parseInt(input2);
+                switch (y) {
+                    case 1:
+                        user.reviewAllBooks();
+                        break;
+                    case 2:
+                        user.searchBooks();
+                        break;
+                    case 3:
+                        user.addBook();
+                        break;
+                    case 4:
+                        user.deleteBook();
+                        break;
+                    case 5:
+                        user.sendEmailToAdmin();
+                    default:
+                        System.out.println("Error");
+                        break;
+                }
+            } while (!input2.equals("exit"));
+        }
+        }
