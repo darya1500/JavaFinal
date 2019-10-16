@@ -1,0 +1,28 @@
+//Попробуйте решить данную задачу хотя бы на 50%.
+//Задание 4. Многопоточность. Порт . Корабли заходят в порт для
+//разгрузки/загрузки контейнеров. Число контейнеров, находящихся в текущий момент
+//в порту и на корабле, должно быть неотрицательным и превышающим заданную
+//грузоподъемность судна и вместимость порта. В порту работает несколько причалов.
+//У одного причала может стоять один корабль. Корабль может загружаться у причала
+//или разгружаться.
+
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        Port port=new Port(6000,4,5000);
+        port.getListOfShips().add(new Ship("Star",200,150,port));
+        port.getListOfShips().add(new Ship("Lola",250,6,port));
+        port.getListOfShips().add(new Ship("Melody",500,480,port));
+        port.getListOfShips().add(new Ship("Anna",100,99,port));
+        port.getListOfShips().add(new Ship("Olga",140,77,port));
+        for (Ship ship:port.getListOfShips()){
+           int numberOfFreeDockings=port.getNumberOfDockings();
+           if (numberOfFreeDockings!=0){
+              ship.start();
+              numberOfFreeDockings--;
+           }else {
+               ship.wait();
+           }
+        }
+    }
+}
