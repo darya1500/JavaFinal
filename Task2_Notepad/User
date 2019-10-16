@@ -1,0 +1,70 @@
+import java.io.*;
+
+public class User {
+    private String name;
+    public BufferedReader bufferedReader;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addNote() throws IOException, ClassNotFoundException {
+        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Write topic");
+        String topic=bufferedReader.readLine();
+        System.out.println("Write email");
+        String email=bufferedReader.readLine();
+        System.out.println("Write message");
+        String message=bufferedReader.readLine();
+        Notepad notepad=new Notepad(topic,email,message);
+        CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+        catalogOfNotes.addNote(notepad);
+    }
+
+    public User() {
+    }
+
+    public void findByWord() throws IOException, ClassNotFoundException {
+        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Write word");
+        String word=bufferedReader.readLine();
+        CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+        catalogOfNotes.findByWordInText(word);
+    }
+        public void findByTopic() throws IOException, ClassNotFoundException {
+            bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Write topic");
+            String topic=bufferedReader.readLine();
+         CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+        catalogOfNotes.findByTopicInText(topic);
+}
+
+    public void findByDate() throws IOException, ClassNotFoundException {
+        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Write date (example:2019_16_Oct)");
+        String date=bufferedReader.readLine();
+        CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+        catalogOfNotes.findByDateInText(date);
+         }
+
+    public void findByEmail() throws IOException, ClassNotFoundException {
+        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Write email");
+        String email=bufferedReader.readLine();
+        CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+        catalogOfNotes.findByEmailInText(email);
+        }
+
+    public void sortNotesByTopic() throws IOException, ClassNotFoundException {
+       CatalogOfNotes catalogOfNotes=new CatalogOfNotes();
+       catalogOfNotes.sortAllNotes();
+    }
+}
