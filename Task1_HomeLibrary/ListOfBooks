@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.ArrayList;
+
+public class ListOfBooks {
+    public static ArrayList<Book> listOfBooks=new ArrayList<>();
+
+    public ListOfBooks() throws IOException {
+
+    }
+    static {
+        listOfBooks.add(new Book("1","1","paper book"));
+        listOfBooks.add(new Book("1984","Orwell","paper book"));
+        listOfBooks.add(new Book("Fahrenheit 451","Bradbury","paper book"));
+        listOfBooks.add(new Book("The Catcher in the Rye","Salinger","e-book"));
+        listOfBooks.add(new Book("To Kill a Mockingbird","Lee","paper book"));
+        listOfBooks.add(new Book("The Lord of the Rings","Tolkien","e-book"));
+        listOfBooks.add(new Book("The Little Prince ","Saint-Exupéry","paper book"));
+        listOfBooks.add(new Book("Harry Potter","Rowling","e-book"));
+    }
+
+    public void seeAllBooks() throws IOException, ClassNotFoundException {
+        listOfBooks=convertTextToArray();
+        for (int i=0;i<listOfBooks.size();i++){
+            System.out.println(listOfBooks.get(i).toString());
+        }
+    }
+
+    public void findBook(String inputNameOfBook) throws IOException, ClassNotFoundException {
+        listOfBooks=convertTextToArray();
+        int x=0;
+        for (int i=0;i<listOfBooks.size();i++){
+            if (inputNameOfBook.equals(listOfBooks.get(i).getNameOfBook())){
+                System.out.println("This book is found:");
+                System.out.println(listOfBooks.get(i).toString());
+                x++;
+                break;
+            }
+        }
+        if (x==0){
+        System.out.println("No such book");
+    }}
+
+    public void addBook(Book book) throws IOException, ClassNotFoundException {
+        listOfBooks=convertTextToArray();
+        listOfBooks.add(book);
+        System.out.println("Book has been successfully added");
+        convertArrayToText();
+    }
+
+    public void deleteBook(String inputName) throws IOException, ClassNotFoundException {
+        listOfBooks=convertTextToArray();
+        int x=0;
+        for (int i=0;i<listOfBooks.size();i++){
+            if (inputName.equals(listOfBooks.get(i).getNameOfBook())){
+                listOfBooks.remove(i);
+                System.out.println("Book has been removed");
+                x++;
+                convertArrayToText();
+                break;
+            }
+        }
+        if (x==0){
+            System.out.println("No such book");
+        }
+    }
+    public static void convertArrayToText() throws IOException {
+        FileOutputStream fileOutputStream=new FileOutputStream("ListOfBooks.txt");
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(listOfBooks);
+        fileOutputStream.close();
+        objectOutputStream.close();
+    }
+    public static ArrayList<Book> convertTextToArray() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream=new FileInputStream("ListOfBooks.txt");
+        ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+        Object object=objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        ArrayList<Book> listOfBooks=(ArrayList<Book>)object;
+        return listOfBooks;
+    }
+}
