@@ -1,0 +1,88 @@
+import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client {
+    private static Socket clientSocket;
+    private static BufferedReader reader;
+    private static DataOutputStream oos;
+    private static DataInputStream ois;
+
+    public static void main(String[] args) throws IOException {
+        try{
+            try{ clientSocket = new Socket("localhost", 4004);
+                reader = new BufferedReader(new InputStreamReader(System.in));
+                oos = new DataOutputStream(clientSocket.getOutputStream());
+                ois = new DataInputStream(clientSocket.getInputStream());
+                System.out.println("If you want to create new document-press 1, if you want change document-press 2, if you want to review the case-press 3, if you want to quit-quit");
+                while(!clientSocket.isOutputShutdown()){
+                    if(reader.ready()){
+                        String choice = reader.readLine();
+                        oos.writeUTF(choice);
+                        oos.flush();
+                        if(choice.equalsIgnoreCase("quit")){
+                            System.out.println("Client disconnected");
+                            if(ois.read() > -1)     {
+                                System.out.println("reading...");
+                            }
+                            System.out.println("Disconnected");
+                            break;
+                        }
+                        System.out.println("Client sent message & start waiting for data from server...");
+                        if (choice.equals("1")){
+                    String in1=ois.readUTF();
+                            System.out.println(in1);
+                            if (in1.equals("You can not create document")){
+                                break;
+                            }
+                            String nameOfFile = reader.readLine();
+                            oos.writeUTF(nameOfFile);
+                            String in2=ois.readUTF();
+                            System.out.println(in2);
+                            String textOfFile = reader.readLine();
+                            oos.writeUTF(textOfFile);
+                            String in3=ois.readUTF();
+                            System.out.println(in3);
+                            System.out.println("Disconnected");
+                            break;
+                        }
+                        if (choice.equals("2")){
+                            String in1=ois.readUTF();
+                            System.out.println(in1);
+                            if (in1.equals("You can not change the document")){
+                                break;
+                            }String x = reader.readLine();
+                            oos.writeUTF(x);
+                            String in2=ois.readUTF();
+                            System.out.println(in2);
+                            String in3=ois.readUTF();
+                            System.out.println(in3);
+                            String textOfFile = reader.readLine();
+                            oos.writeUTF(textOfFile);
+                            oos.flush();
+                            String in4=ois.readUTF();
+                            System.out.println(in4);
+                            break;
+                        }
+                        if (choice.equals("3")){
+                            String in1=ois.readUTF();
+                            System.out.println(in1);
+                            String x = reader.readLine();
+                            oos.writeUTF(x);
+                            String in4=ois.readUTF();
+                            System.out.println(in4);
+                            break;
+                        }
+                        if(ois.read() > -1)     {
+                            String in = ois.readUTF();
+                            System.out.println(in);
+                        }
+                    }
+                }
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }}
