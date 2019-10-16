@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.ArrayList;
+
+public class ListOfUsers {
+    public static ArrayList<User> listOfUsers=new ArrayList<>();
+
+    public ListOfUsers() {
+    }
+    static {
+        listOfUsers.add(new User("123@gmail.com","123","admin"));
+        listOfUsers.add(new User("user1@gmail.com","111","user"));
+        listOfUsers.add(new User("user2@gmail.com","222","user"));
+        listOfUsers.add(new User("user3@gmail.com","333","user"));
+        listOfUsers.add(new User("user4@gmail.com","444","user"));
+        listOfUsers.add(new User("user5@gmail.com","555","user"));
+    }
+
+    public User checkUser(String email,String password) throws IOException, ClassNotFoundException {
+        listOfUsers=convertUserTextToArray();
+        for (int i=0;i<listOfUsers.size();i++){
+        if (email.equals(listOfUsers.get(i).getEmailAddressUser())){
+            if (password.equals(listOfUsers.get(i).getPassword())){
+                System.out.println("You are successfully signed in");
+                User user2=new User(email,password,listOfUsers.get(i).getRole());
+                return user2;
+            }else {
+                System.out.println("Password is incorrect.Try again");
+                return null;
+            }
+        }
+    }
+        System.out.println("Such account does not exist");
+        return null;
+    }
+    public static void convertUserArrayToText() throws IOException {
+        FileOutputStream fileOutputStream=new FileOutputStream("ListOfUsers.txt");
+        ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(listOfUsers);
+        fileOutputStream.close();
+        objectOutputStream.close();
+    }
+    public static ArrayList<User> convertUserTextToArray() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream=new FileInputStream("ListOfUsers.txt");
+        ObjectInputStream objectInputStream=new ObjectInputStream(fileInputStream);
+        Object object=objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        ArrayList<User> listOfUsers=(ArrayList<User>)object;
+        return listOfUsers;
+    }
+
+    public void addUserToListOfUsers(User user) throws IOException, ClassNotFoundException {
+        listOfUsers=convertUserTextToArray();
+        listOfUsers.add(user);
+        convertUserArrayToText();
+
+    }
+}
