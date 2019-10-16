@@ -1,0 +1,65 @@
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class Document implements Serializable {
+    private String nameOfDocument;
+    private String date;
+    private String textOfDocument;
+    public static ArrayList<Document> listOfDocuments;
+    static {
+        listOfDocuments=new ArrayList<>();
+        listOfDocuments.add(new Document("document1","12345"));
+        listOfDocuments.add(new Document("document2","17yut2345"));
+        listOfDocuments.add(new Document("document3","1tyu2345"));
+        listOfDocuments.add(new Document("document4","123tt45"));
+        listOfDocuments.add(new Document("document5","12tt345"));
+    }
+
+    public Document() {
+    }
+
+    public Document(String nameOfDocument, String textOfDocument) {
+        this.nameOfDocument = nameOfDocument;
+        this.textOfDocument=textOfDocument;
+        getDate();
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "nameOfDocument='" + nameOfDocument + '\'' +
+                ", date='" + date + '\'' +
+                ", textOfDocument='" + textOfDocument + '\'' +
+                '}';
+    }
+
+    public String getTextOfDocument() {
+        return textOfDocument;
+    }
+
+    public void setTextOfDocument(String textOfDocument) {
+        this.textOfDocument = textOfDocument;
+    }
+
+    public String getDate() {
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy_dd_MMM", Locale.ENGLISH);
+        Calendar cal = Calendar.getInstance();
+        date =simpleDateFormat.format(cal.getTime());
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getNameOfDocument() {
+        return nameOfDocument;
+    }
+
+    public void setNameOfDocument(String nameOfDocument) {
+        this.nameOfDocument = nameOfDocument;
+    }
+}
