@@ -14,6 +14,7 @@ import java.io.IOException;
 //осуществлять с использованием регулярных выражений.
 //• Особое условие: проверку введенной информации на валидность должен
 //осуществлять код, непосредственно добавляющий информацию.
+
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Menu menu=new Menu();
