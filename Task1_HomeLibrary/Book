@@ -6,27 +6,10 @@ public class Book implements Serializable {
     private String typeOfBook;
     private static final long serialVersionUID=1L;
 
-    public String getTypeOfBook() {
-        return typeOfBook;
-    }
-
-    public void setTypeOfBook(String typeOfBook) {
-        this.typeOfBook = typeOfBook;
-    }
-
     public Book(String nameOfBook, String authorOfBook,String typeOfBook) {
         this.nameOfBook = nameOfBook;
         this.authorOfBook=authorOfBook;
         this.typeOfBook=typeOfBook;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "nameOfBook='" + nameOfBook + '\'' +
-                ", authorOfBook='" + authorOfBook + '\'' +
-                ", typeOfBook='" + typeOfBook + '\'' +
-                '}';
     }
 
     public String getAuthorOfBook() {
@@ -44,4 +27,21 @@ public class Book implements Serializable {
     public void setNameOfBook(String nameOfBook) {
         this.nameOfBook = nameOfBook;
     }
+    public String getTypeOfBook() {
+        return typeOfBook;
+    }
+
+    public void setTypeOfBook(String typeOfBook) {
+        this.typeOfBook = typeOfBook;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "nameOfBook='" + nameOfBook + '\'' +
+                ", authorOfBook='" + authorOfBook + '\'' +
+                ", typeOfBook='" + typeOfBook + '\'' +
+                '}';
+    }
 }
+
