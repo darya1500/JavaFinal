@@ -1,47 +1,46 @@
 import java.io.Serializable;
 
 public class Book implements Serializable {
-    private String nameOfBook;
-    private String authorOfBook;
-    private String typeOfBook;
+    private String name;
+    private String author;
+    private String type;
     private static final long serialVersionUID=1L;
 
-    public Book(String nameOfBook, String authorOfBook,String typeOfBook) {
-        this.nameOfBook = nameOfBook;
-        this.authorOfBook=authorOfBook;
-        this.typeOfBook=typeOfBook;
+    public Book(String name, String author, String type) {
+        this.name = name;
+        this.author = author;
+        this.type = type;
     }
 
-    public String getAuthorOfBook() {
-        return authorOfBook;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorOfBook(String authorOfBook) {
-        this.authorOfBook = authorOfBook;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getNameOfBook() {
-        return nameOfBook;
+    public String getName() {
+        return name;
     }
 
-    public void setNameOfBook(String nameOfBook) {
-        this.nameOfBook = nameOfBook;
+    public void setName(String name) {
+        this.name = name;
     }
-    public String getTypeOfBook() {
-        return typeOfBook;
+    public String getType() {
+        return type;
     }
 
-    public void setTypeOfBook(String typeOfBook) {
-        this.typeOfBook = typeOfBook;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "nameOfBook='" + nameOfBook + '\'' +
-                ", authorOfBook='" + authorOfBook + '\'' +
-                ", typeOfBook='" + typeOfBook + '\'' +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
-
