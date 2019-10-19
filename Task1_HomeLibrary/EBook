@@ -1,50 +1,51 @@
 import java.io.Serializable;
 
 public class EBook extends Book implements Serializable {
-    private String nameOfBook;
-    private String authorOfBook;
-    private String typeOfBook;
+    private String name;
+    private String author;
+    private String type;
     private static final long serialVersionUID=1L;
 
-    public EBook(String nameOfBook, String authorOfBook, String typeOfBook) {
-        super(nameOfBook, authorOfBook, typeOfBook);
+    public EBook(String name, String author, String type) {
+        super(name, author, type);
     }
 
     @Override
-    public String getTypeOfBook() {
+    public String getType() {
         return "e-book";
     }
 
     @Override
-    public String getAuthorOfBook() {
-        return authorOfBook;
+    public String getAuthor() {
+        return author;
     }
 
     @Override
-    public void setAuthorOfBook(String authorOfBook) {
-        this.authorOfBook = authorOfBook;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
-    public String getNameOfBook() {
-        return nameOfBook;
+    public String getName() {
+        return name;
     }
 
     @Override
-    public void setNameOfBook(String nameOfBook) {
-        this.nameOfBook = nameOfBook;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
-    public void setTypeOfBook(String typeOfBook) {
-        this.typeOfBook = typeOfBook;
+    public void setType(String type) {
+        this.type = type;
     }
+
     @Override
     public String toString() {
         return "EBook{" +
-                "nameOfBook='" + nameOfBook + '\'' +
-                ", authorOfBook='" + authorOfBook + '\'' +
-                ", typeOfBook='" + typeOfBook + '\'' +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
