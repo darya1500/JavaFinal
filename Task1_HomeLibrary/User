@@ -1,29 +1,18 @@
 import java.io.*;
 
 public class User implements Serializable{
-    private static BufferedReader bufferedReader;
     private String emailAddressUser;
     private String password;
     private String role;
     private static final long serialVersionUID=1L;
-    public BufferedReader bufferedReader2;
+
+    public User() {
+    }
 
     public User(String emailAddressUser,String password,String role) {
         this.emailAddressUser = emailAddressUser;
         this.password=password;
         this.role=role;
-    }
-
-    public User() {
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "emailAddressUser='" + emailAddressUser + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
     }
 
     public String getRole() {
@@ -49,78 +38,14 @@ public class User implements Serializable{
     public void setEmailAddressUser(String emailAddressUser) {
         this.emailAddressUser = emailAddressUser;
     }
-    public void addBook() throws IOException, ClassNotFoundException {
-        if (this.getRole().equals("admin")){
-         bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Write name of the book");
-           String inputName=bufferedReader.readLine();
-            System.out.println("Write author of the book");
-            String inputAuthor=bufferedReader.readLine();
-            System.out.println("Write type of the book");
-            String inputRole=bufferedReader.readLine();
-            Book book=new Book(inputName,inputAuthor,inputRole);
-            ListOfBooks listOfBooks=new ListOfBooks();
-            listOfBooks.addBook(book);
-            sendEmailToUsers();
-        }else{
-            System.out.println("You can not perform this action");
-        }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "emailAddressUser='" + emailAddressUser + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
-    public void deleteBook() throws IOException, ClassNotFoundException {
-        if (this.getRole().equals("admin")){
-            bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Write name of the book");
-            String inputName=bufferedReader.readLine();
-            ListOfBooks listOfBooks=new ListOfBooks();
-            listOfBooks.deleteBook(inputName);
-        }else {
-            System.out.println("You can not perform this action");
-        }
-    }
-    public void sendEmailToUsers(){
-        System.out.println("Email has been sent to all users");
-    }
-    public void searchBooks() throws IOException, ClassNotFoundException {
-        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Write name of a book");
-        String inputNameOfBook=bufferedReader.readLine();
-        ListOfBooks listOfBooks=new ListOfBooks();
-        listOfBooks.findBook(inputNameOfBook);
-    }
-    public void reviewAllBooks() throws IOException, ClassNotFoundException {
-        ListOfBooks listOfBooks=new ListOfBooks();
-        listOfBooks.seeAllBooks();
-    }
-    public void sendEmailToAdmin() throws IOException {
-        if (!this.getRole().equals("admin")){
-           bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Write your message to administrator here");
-            String inputMessage=bufferedReader.readLine();
-            System.out.println("Message has been sent");
-        }else {
-            System.out.println("You can not perform this action");
-        }
-    }
-    public static User createNewUser() throws IOException, ClassNotFoundException {
-        System.out.println("Write your email");
-        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-        String inputEmail=bufferedReader.readLine();
-        System.out.println("Write your password");
-        String inputPassword=bufferedReader.readLine();
-        User user=new User(inputEmail,inputPassword,"user");
-        ListOfUsers listOfUsers=new ListOfUsers();
-        listOfUsers.addUserToListOfUsers(user);
-        System.out.println("New user is registered");
-        return user;
-    }
-    public static User signInUser() throws IOException, ClassNotFoundException {
-        System.out.println("Write your email");
-        bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-        String inputEmail=bufferedReader.readLine();
-        System.out.println("Write your password");
-        String inputPassword=bufferedReader.readLine();
-        ListOfUsers listOfUsers=new ListOfUsers();
-        User user=listOfUsers.checkUser(inputEmail,inputPassword);
-        return user;
-    }
+
 }
