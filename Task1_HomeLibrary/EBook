@@ -16,15 +16,6 @@ public class EBook extends Book implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "EBook{" +
-                "nameOfBook='" + nameOfBook + '\'' +
-                ", authorOfBook='" + authorOfBook + '\'' +
-                ", typeOfBook='" + typeOfBook + '\'' +
-                '}';
-    }
-
-    @Override
     public String getAuthorOfBook() {
         return authorOfBook;
     }
@@ -48,4 +39,13 @@ public class EBook extends Book implements Serializable {
     public void setTypeOfBook(String typeOfBook) {
         this.typeOfBook = typeOfBook;
     }
+    @Override
+    public String toString() {
+        return "EBook{" +
+                "nameOfBook='" + nameOfBook + '\'' +
+                ", authorOfBook='" + authorOfBook + '\'' +
+                ", typeOfBook='" + typeOfBook + '\'' +
+                '}';
+    }
 }
+
