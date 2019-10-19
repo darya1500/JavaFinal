@@ -6,6 +6,10 @@ public class PaperBook extends Book implements Serializable {
     private String typeOfBook;
     private static final long serialVersionUID=1L;
 
+    public PaperBook(String nameOfBook, String authorOfBook, String typeOfBook) {
+        super(nameOfBook, authorOfBook, typeOfBook);
+    }
+
     @Override
     public void setTypeOfBook(String typeOfBook) {
         this.typeOfBook = typeOfBook;
@@ -43,9 +47,5 @@ public class PaperBook extends Book implements Serializable {
                 ", authorOfBook='" + authorOfBook + '\'' +
                 ", typeOfBook='" + typeOfBook + '\'' +
                 '}';
-    }
-
-    public PaperBook(String nameOfBook, String authorOfBook, String typeOfBook) {
-        super(nameOfBook, authorOfBook, typeOfBook);
     }
 }
