@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class User implements Serializable{
-    private String emailAddressUser;
+    private String emailAddress;
     private String password;
     private String role;
     private static final long serialVersionUID=1L;
@@ -9,8 +9,8 @@ public class User implements Serializable{
     public User() {
     }
 
-    public User(String emailAddressUser,String password,String role) {
-        this.emailAddressUser = emailAddressUser;
+    public User(String emailAddress, String password, String role) {
+        this.emailAddress = emailAddress;
         this.password=password;
         this.role=role;
     }
@@ -31,21 +31,20 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public String getEmailAddressUser() {
-        return emailAddressUser;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailAddressUser(String emailAddressUser) {
-        this.emailAddressUser = emailAddressUser;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "emailAddressUser='" + emailAddressUser + '\'' +
+                "emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
-
 }
