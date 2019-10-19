@@ -7,6 +7,7 @@ public class Menu {
     }
 
     public void openMenu() throws IOException, ClassNotFoundException {
+        UserLogic userLogic=new UserLogic();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Write:" + "\n" +
                 "1-sign in" + "\n" +
@@ -20,10 +21,10 @@ public class Menu {
         int x = Integer.parseInt(input);
         switch (x) {
             case 1:
-                user = User.signInUser();
+                user = userLogic.signInUser();
                 break;
             case 2:
-                user = User.createNewUser();
+                user = userLogic.createNewUser();
                 break;
             default:
                 System.out.println("Error");
@@ -46,19 +47,19 @@ public class Menu {
                 int y = Integer.parseInt(input2);
                 switch (y) {
                     case 1:
-                        user.reviewAllBooks();
+                        userLogic.reviewAllBooks();
                         break;
                     case 2:
-                        user.searchBooks();
+                        userLogic.searchBooks();
                         break;
                     case 3:
-                        user.addBook();
+                        userLogic.addBook(user);
                         break;
                     case 4:
-                        user.deleteBook();
+                        userLogic.deleteBook(user);
                         break;
                     case 5:
-                        user.sendEmailToAdmin();
+                        userLogic.sendEmailToAdmin(user);
                     default:
                         System.out.println("Error");
                         break;
