@@ -3,17 +3,17 @@ import java.util.ArrayList;
 public class Port {
     private int capacityOfPort;
     private int numberOfDockings;
-    ArrayList<Ship> listOfShips=new ArrayList<Ship>();
     private int currentNumberOfContainersInPort;
+    public ArrayList<Ship> listOfShips=new ArrayList<Ship>();
 
-    public int getCurrentNumberOfContainersInPort() {
-        return currentNumberOfContainersInPort;
+    public Port() {
     }
 
-    public void setCurrentNumberOfContainersInPort(int currentNumberOfContainersInPort) {
-        this.currentNumberOfContainersInPort = currentNumberOfContainersInPort;
+    public Port(int capacityOfPort, int numberOfDockings,int currentNumberOfContainersInPort) {
+        this.capacityOfPort = capacityOfPort;
+        this.numberOfDockings=numberOfDockings;
+        this.currentNumberOfContainersInPort=currentNumberOfContainersInPort;
     }
-
     public ArrayList<Ship> getListOfShips() {
         return listOfShips;
     }
@@ -22,10 +22,12 @@ public class Port {
         this.listOfShips = listOfShips;
     }
 
-    public Port(int capacityOfPort, int numberOfDockings,int currentNumberOfContainersInPort) {
-        this.capacityOfPort = capacityOfPort;
-        this.numberOfDockings=numberOfDockings;
-        this.currentNumberOfContainersInPort=currentNumberOfContainersInPort;
+    public int getCurrentNumberOfContainersInPort() {
+        return currentNumberOfContainersInPort;
+    }
+
+    public void setCurrentNumberOfContainersInPort(int currentNumberOfContainersInPort) {
+        this.currentNumberOfContainersInPort = currentNumberOfContainersInPort;
     }
 
     public int getNumberOfDockings() {
