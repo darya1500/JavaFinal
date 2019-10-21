@@ -9,6 +9,7 @@ public class Document implements Serializable {
     private String date;
     private String textOfDocument;
     public static ArrayList<Document> listOfDocuments;
+
     static {
         listOfDocuments=new ArrayList<>();
         listOfDocuments.add(new Document("document1","12345"));
@@ -25,15 +26,6 @@ public class Document implements Serializable {
         this.nameOfDocument = nameOfDocument;
         this.textOfDocument=textOfDocument;
         getDate();
-    }
-
-    @Override
-    public String toString() {
-        return "Document{" +
-                "nameOfDocument='" + nameOfDocument + '\'' +
-                ", date='" + date + '\'' +
-                ", textOfDocument='" + textOfDocument + '\'' +
-                '}';
     }
 
     public String getTextOfDocument() {
@@ -61,5 +53,14 @@ public class Document implements Serializable {
 
     public void setNameOfDocument(String nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "nameOfDocument='" + nameOfDocument + '\'' +
+                ", date='" + date + '\'' +
+                ", textOfDocument='" + textOfDocument + '\'' +
+                '}';
     }
 }
