@@ -22,14 +22,6 @@ public class Notepad implements Serializable, Comparable<Notepad> {
         Calendar cal = Calendar.getInstance();
         date =simpleDateFormat.format(cal.getTime());
     }
-    @Override
-    public String toString() {
-        return "Notepad:" +
-                "topic- " + topic  +
-                ", date- " + date +
-                ", email- " + email  +
-                ",message- " + message ;
-    }
 
     public String getMessage() {
         return message;
@@ -63,7 +55,14 @@ public class Notepad implements Serializable, Comparable<Notepad> {
         this.topic = topic;
     }
 
-
+    @Override
+    public String toString() {
+        return "Notepad:" +
+                "topic- " + topic  +
+                ", date- " + date +
+                ", email- " + email  +
+                ",message- " + message ;
+    }
     public static Comparator<Notepad> NoteTopicComparator = new Comparator<Notepad>() {
         public int compare(Notepad notepad1, Notepad notepad2) {
             String noteTopic1 = notepad1.getTopic();
