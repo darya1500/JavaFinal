@@ -5,23 +5,18 @@ public class User {
     private String role;
     private Document document;
     private FileOutputStream fileOutputStream;
-    private BufferedReader bufferedReader;
     private ObjectOutputStream objectOutputStream;
-    private FileInputStream fileInputStream;
-    private ObjectInputStream objectInputStream;
 
-
+    public User(String name, String role) {
+        this.name = name;
+        this.role=role;
+    }
     public Document getDocument() {
         return document;
     }
 
     public void setDocument(Document document) {
         this.document = document;
-    }
-
-    public User(String name, String role) {
-        this.name = name;
-        this.role=role;
     }
 
     public String getRole() {
